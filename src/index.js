@@ -22,6 +22,8 @@ export const MODE_DISABLED = Symbol('atrament mode - disabled');
 const pathDrawingModes = [MODE_DRAW, MODE_ERASE];
 const configKeys = ['weight', 'smoothing', 'adaptiveStroke', 'mode'];
 
+export const setupPointerEvents = setupPointerEvents;
+
 export default class Atrament extends AtramentEventTarget {
   adaptiveStroke = true;
   canvas;
