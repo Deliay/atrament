@@ -54,7 +54,11 @@ export default class Atrament extends AtramentEventTarget {
     this.#context = Atrament.#setupContext(this.canvas, config);
     this.#setupFill({ FillWorker: config.fill });
 
-    this.#removePointerEventListeners = setupPointerEvents({
+    const setupFn = config.setupPointerEventsFunction
+    ? config.setupPointerEventsFunction
+    : setupPointerEvents;
+
+    this.#removePointerEventListeners = setupFn({
       canvas: this.canvas,
       move: this.#pointerMove.bind(this),
       down: this.#pointerDown.bind(this),
