@@ -339,7 +339,7 @@ export default class Atrament extends AtramentEventTarget {
   }
 
   static #setupContext(canvas, config) {
-    const context = canvas.getContext('2d');
+    const context = config.contextGetter ? contextGetter(canvas) : canvas.getContext('2d');
     // since this method is static, we have to add a fallback to the resolution here
     // TODO: see if these methods really have to be static.
     const scale = config.resolution || window.devicePixelRatio;
