@@ -59,6 +59,25 @@ const lineDistance = (x1, y1, x2, y2) => {
 };
 /* eslint-enable no-param-reassign */
 
+const MAX_LINE_THICKNESS = 100;
+
+const MIN_LINE_THICKNESS = 2;
+const LINE_THICKNESS_RANGE = MAX_LINE_THICKNESS - MIN_LINE_THICKNESS;
+const THICKNESS_INCREMENT = 0.25;
+const MIN_SMOOTHING_FACTOR = 0.87;
+const INITIAL_SMOOTHING_FACTOR = 0.85;
+const WEIGHT_SPREAD = 30;
+const INITIAL_THICKNESS = 2;
+const DEFAULT_PRESSURE = 0.5;
+
+const MODE_DRAW = Symbol('atrament mode - draw');
+const MODE_ERASE = Symbol('atrament mode - erase');
+const MODE_FILL = Symbol('atrament mode - fill');
+const MODE_DISABLED = Symbol('atrament mode - disabled');
+
+const pathDrawingModes = [MODE_DRAW, MODE_ERASE];
+const configKeys = ['weight', 'smoothing', 'adaptiveStroke', 'mode'];
+
 const pointerEventHandler = (handler) => (event) => {
   // Ignore pointers such as additional touches on a multi-touch screen,
   // as well as all mouse buttons other than the left button.
@@ -97,25 +116,6 @@ const setupPointerEvents = ({
     document.removeEventListener('pointerout', upListener);
   };
 };
-
-const MAX_LINE_THICKNESS = 100;
-
-const MIN_LINE_THICKNESS = 2;
-const LINE_THICKNESS_RANGE = MAX_LINE_THICKNESS - MIN_LINE_THICKNESS;
-const THICKNESS_INCREMENT = 0.25;
-const MIN_SMOOTHING_FACTOR = 0.87;
-const INITIAL_SMOOTHING_FACTOR = 0.85;
-const WEIGHT_SPREAD = 30;
-const INITIAL_THICKNESS = 2;
-const DEFAULT_PRESSURE = 0.5;
-
-const MODE_DRAW = Symbol('atrament mode - draw');
-const MODE_ERASE = Symbol('atrament mode - erase');
-const MODE_FILL = Symbol('atrament mode - fill');
-const MODE_DISABLED = Symbol('atrament mode - disabled');
-
-const pathDrawingModes = [MODE_DRAW, MODE_ERASE];
-const configKeys = ['weight', 'smoothing', 'adaptiveStroke', 'mode'];
 
 class Atrament extends AtramentEventTarget {
   adaptiveStroke = true;
@@ -539,3 +539,4 @@ exports.MODE_DRAW = MODE_DRAW;
 exports.MODE_ERASE = MODE_ERASE;
 exports.MODE_FILL = MODE_FILL;
 exports.default = Atrament;
+exports.setupPointerEvents = setupPointerEvents;
